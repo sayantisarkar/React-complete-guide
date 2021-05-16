@@ -14,7 +14,7 @@ import Person from "./components/Person";
 //   );
 // }
 
-class App extends Component(){
+class App extends Component {
   //defining state
   state = {
     persons:[
@@ -27,6 +27,8 @@ class App extends Component(){
   }
 
   switchNamehandler = (newName)=>{
+    // console.log('Was clicked!');
+    // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
     this.setState({
       persons:[
         {name:newName , age:"29"},
@@ -36,13 +38,34 @@ class App extends Component(){
     })
   }
 
+  togglePersonHadler = ()=>{
+    const doShow = this.state.showPersons;
+    this.setState({
+      showPersons: !doShow
+    })
+  }
+
   render () {
+
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return ( 
       <div className="App">
       <h1>Hiiiii Pooja</h1>
       <p>Are you there??</p>
-      <button style={style} onClick={()=>this.switchNamehandler('Sayanti')}>Switch Name</button>
-      <div>
+      <button style={style} 
+      // onClick={()=>this.switchNamehandler('Sayanti')}
+      onClick={()=> this.togglePersonHadler}
+      >
+      Switch Name</button>
+      {this.state.showPersons?
+      (<div>
       <Person 
         name= {this.state.persons[0].name}
         age= {this.state.persons[0].age} />
@@ -52,7 +75,7 @@ class App extends Component(){
       <Person 
         name= {this.state.persons[2].name}
         age= {this.state.persons[2].age} />
-      </div>
+      </div>) : null}
     
 
       {/* <Person name="Ria" age="29"/>

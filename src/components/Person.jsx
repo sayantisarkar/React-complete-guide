@@ -1,4 +1,5 @@
 import React from "react";
+import './Person.css';
 
 const Person = (props)=> {
  //return <p>I am a person and I am {Math.floor(Math.random()*30)} years old</p>;
