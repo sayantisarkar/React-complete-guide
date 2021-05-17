@@ -39,6 +39,7 @@ class App extends Component {
   }
 
   togglePersonHadler = ()=>{
+    console.log('Toggled');
     const doShow = this.state.showPersons;
     this.setState({
       showPersons: !doShow
@@ -54,18 +55,11 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     };
+    let persons = null;
 
-    return ( 
-      <div className="App">
-      <h1>Hiiiii Pooja</h1>
-      <p>Are you there??</p>
-      <button style={style} 
-      // onClick={()=>this.switchNamehandler('Sayanti')}
-      onClick={()=> this.togglePersonHadler}
-      >
-      Switch Name</button>
-      {this.state.showPersons?
-      (<div>
+    if(this.state.showPersons){
+      persons = (
+      <div>
       <Person 
         name= {this.state.persons[0].name}
         age= {this.state.persons[0].age} />
@@ -75,7 +69,33 @@ class App extends Component {
       <Person 
         name= {this.state.persons[2].name}
         age= {this.state.persons[2].age} />
-      </div>) : null}
+      </div>
+      );
+    }
+
+    return ( 
+      <div className="App">
+      <h1>Hiiiii Pooja</h1>
+      <p>Are you there??</p>
+      <button style={style} 
+      // onClick={()=>this.switchNamehandler('Sayanti')}
+      onClick={this.togglePersonHadler}
+      >
+      Switch Name</button>
+      {persons}
+      
+      {/* {this.state.showPersons?
+      <div>
+      <Person 
+        name= {this.state.persons[0].name}
+        age= {this.state.persons[0].age} />
+      <Person 
+        name= {this.state.persons[1].name}
+        age= {this.state.persons[1].age} />
+      <Person 
+        name= {this.state.persons[2].name}
+        age= {this.state.persons[2].age} />
+      </div> : null} */}
     
 
       {/* <Person name="Ria" age="29"/>
