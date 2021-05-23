@@ -26,16 +26,31 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNamehandler = (event)=>{
+  switchNamehandler = (event, id)=>{
     // console.log('Was clicked!');
     // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
+    
+    // this.setState({
+    //   persons:[
+    //     {id: "agdg1" , name:event.target.value , age:"29"},
+    //     {id: "schc12" ,name:"Jia" , age:"21"},
+    //     {id: "dijoj4" ,name:"Tina", age:"27"}
+    //   ]
+    // })
+
+    //DYNAMIC CHANGE IN NAME & MODIFYING ARRAY //FLEXIBLE LISTS
+    const personIndex = this.state.persons.findIndex(p=>{
+      return p.id === id 
+    });
+    const person ={...this.state.persons[personIndex]};
+    person.name = event.target.value;
+    
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
     this.setState({
-      persons:[
-        {id: "agdg1" , name:event.target , age:"29"},
-        {id: "schc12" ,name:"Jia" , age:"21"},
-        {id: "dijoj4" ,name:"Tina", age:"27"}
-      ]
-    })
+      persons :persons
+    });
+
   }
 
   togglePersonHadler = ()=>{
@@ -59,7 +74,8 @@ class App extends Component {
   render () {
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -70,13 +86,12 @@ class App extends Component {
     if(this.state.showPersons){
       persons = (
       <div>
-
        {this.state.persons.map((person,index)=>{
          return <Person click= {()=> this.deletePersonHandler(index)} 
          name = {person.name} 
          age={person.age} 
          key={person.id}
-         changed = {()=>this.switchNamehandler()}
+         changed = {(event)=>this.switchNamehandler(event,person.id)}
          />
        })}
 
@@ -92,6 +107,7 @@ class App extends Component {
         age= {this.state.persons[2].age} /> */}
       </div>
       );
+      style.backgroundColor ='red';
     }
 
     return ( 
