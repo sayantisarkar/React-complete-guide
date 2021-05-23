@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from "./components/Person";
+import Radium from 'radium';
 
 // function App() {
 //   return (
@@ -109,11 +110,20 @@ class App extends Component {
       );
       style.backgroundColor ='red';
     }
+    const classes = [];
+
+    if(this.state.persons.length<=2){
+      classes.push('red');
+    }
+
+    if(this.state.persons.length<=1){
+      classes.push('bold');
+    }
 
     return ( 
       <div className="App">
       <h1>Hiiiii Pooja</h1>
-      <p>Are you there??</p>
+      <p className={classes.join(" ")}>Are you there??</p>
       <button style={style} 
       // onClick={()=>this.switchNamehandler('Sayanti')}
       onClick={this.togglePersonHadler}
@@ -145,4 +155,4 @@ class App extends Component {
   
 }
 
-export default App;
+export default Radium(App);
