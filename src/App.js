@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from "./components/Person";
-import Radium, {StyleRoot} from 'radium';
+//import Radium, {StyleRoot} from 'radium';
+import  styled from 'styled-components';
+
+const StyledButton = styled.button`
+  background-color: ${props=> props.alt?'red':'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+`;
+
 
 // function App() {
 //   return (
@@ -16,6 +32,9 @@ import Radium, {StyleRoot} from 'radium';
 // }
 
 class App extends Component {
+
+  
+
   //defining state
   state = {
     persons:[
@@ -112,11 +131,13 @@ class App extends Component {
         age= {this.state.persons[2].age} /> */}
       </div>
       );
-      style.backgroundColor ='red';
-      style['.hover']= {
-         backgroundColor:'salmon',
-         color:'black'
-      };
+
+      //Alternate added to Styled component
+      // style.backgroundColor ='red';
+      // style['.hover']= {
+      //    backgroundColor:'salmon',
+      //    color:'black'
+      // };
     }
     const classes = [];
 
@@ -129,41 +150,51 @@ class App extends Component {
     }
 
     return ( 
-    <StyleRoot>
+
+    
+    //<StyleRoot>
       <div className="App">
-      <h1>Hiiiii Pooja</h1>
-      <p className={classes.join(" ")}>Are you there??</p>
-      <button style={style} 
-      // onClick={()=>this.switchNamehandler('Sayanti')}
-      onClick={this.togglePersonHadler}
-      >
-      Switch Name</button>
-      {persons}
+        <h1>Hiiiii Pooja</h1>
+        <p className={classes.join(" ")}>Are you there??</p>
+
+         {/* Using Radium */}
+
+        {/* <button style={style} 
+         onClick={()=>this.switchNamehandler('Sayanti')}
+         onClick={this.togglePersonHadler}
+         > */}
+      
+      {/* Using Styled Component */}
+      <StyledButton alt ={this.state.showPersons} onClick={this.togglePersonHadler}>
+        Switch Name
+      </StyledButton>
+       {persons}
       
       {/* {this.state.showPersons?
-      <div>
-      <Person 
-        name= {this.state.persons[0].name}
-        age= {this.state.persons[0].age} />
-      <Person 
-        name= {this.state.persons[1].name}
-        age= {this.state.persons[1].age} />
-      <Person 
-        name= {this.state.persons[2].name}
-        age= {this.state.persons[2].age} />
-      </div> : null} */}
+      // <div>
+      // <Person 
+      //   name= {this.state.persons[0].name}
+      //   age= {this.state.persons[0].age} />
+      // <Person 
+      //   name= {this.state.persons[1].name}
+      //   age= {this.state.persons[1].age} />
+      // <Person 
+      //   name= {this.state.persons[2].name}
+      //   age= {this.state.persons[2].age} />
+      // </div> : null} */}
     
 
-      {/* <Person name="Ria" age="29"/>
-      <Person name="Jia" age="21">My hobbies are cooking and dancing</Person>
-      <Person name="Tina" age="27"/> */}
+       {/* <Person name="Ria" age="29"/>
+       <Person name="Jia" age="21">My hobbies are cooking and dancing</Person>
+       <Person name="Tina" age="27"/>  */}
      </div>
-    </StyleRoot>
-      
-     );
+    //</StyleRoot>
+     
+    );
+     
   }
    
   
 }
 
-export default Radium(App);
+export default App;
