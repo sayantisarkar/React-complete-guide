@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
 import Person from "./components/Person";
+import ErrorBoundary from './Error Boundary/ErrorBoundary';
+
 //import Radium, {StyleRoot} from 'radium';
 //import  styled from 'styled-components';
 
@@ -109,16 +111,25 @@ class App extends Component {
     //const buttonClass = [classes.Button];
     let buttonClass = '';
 
+    let random = Math.random();
+
+    if(random>0.7){
+      throw new Error('Something went Wrong Pooja !!!!');
+    }
+
     if(this.state.showPersons){
       persons = (
       <div>
        {this.state.persons.map((person,index)=>{
-         return <Person click= {()=> this.deletePersonHandler(index)} 
+         return <ErrorBoundary key={person.id}>
+         <Person click= {()=> this.deletePersonHandler(index)} 
          name = {person.name} 
          age={person.age} 
-         key={person.id}
+         //key={person.id}
          changed = {(event)=>this.switchNamehandler(event,person.id)}
          />
+         </ErrorBoundary>
+        
        })}
 
 
