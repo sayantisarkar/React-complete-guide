@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.module.css';
 import Person from "./components/Person";
 //import Radium, {StyleRoot} from 'radium';
-import  styled from 'styled-components';
+//import  styled from 'styled-components';
 
-const StyledButton = styled.button`
-  background-color: ${props=> props.alt?'red':'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
+// const StyledButton = styled.button`
+//   background-color: ${props=> props.alt?'red':'green'};
+//   color: white;
+//   font: inherit;
+//   border: 1px solid blue;
+//   padding: 8px;
+//   cursor: pointer;
   
-  &:hover {
-    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-    color: black;
-  }
-`;
+//   &:hover {
+//     background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+//     color: black;
+//   }
+// `;
 
 
 // function App() {
@@ -93,19 +93,21 @@ class App extends Component {
 
   render () {
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color:'black'
-      }
-    };
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   ':hover': {
+    //     backgroundColor: 'lightgreen',
+    //     color:'black'
+    //   }
+    // };
     let persons = null;
+    //const buttonClass = [classes.Button];
+    let buttonClass = '';
 
     if(this.state.showPersons){
       persons = (
@@ -138,37 +140,49 @@ class App extends Component {
       //    backgroundColor:'salmon',
       //    color:'black'
       // };
+      //buttonClass.push(classes.Red);
+      buttonClass = classes.Red;
     }
-    const classes = [];
+    const assignedClasses = [];
 
     if(this.state.persons.length<=2){
-      classes.push('red');
+      //classes.push('red');
+      assignedClasses.push(classes.red);
+
     }
 
     if(this.state.persons.length<=1){
-      classes.push('bold');
+      //classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return ( 
-
-    
     //<StyleRoot>
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hiiiii Pooja</h1>
-        <p className={classes.join(" ")}>Are you there??</p>
+        <p className={assignedClasses.join(" ")}>Are you there??</p>
 
-         {/* Using Radium */}
+          {/* Using Radium */}
 
-        {/* <button style={style} 
-         onClick={()=>this.switchNamehandler('Sayanti')}
-         onClick={this.togglePersonHadler}
-         > */}
-      
-      {/* Using Styled Component */}
-      <StyledButton alt ={this.state.showPersons} onClick={this.togglePersonHadler}>
-        Switch Name
-      </StyledButton>
-       {persons}
+          {/* <button style={style} 
+            onClick={()=>this.switchNamehandler('Sayanti')}
+            onClick={this.togglePersonHadler}
+            > */}
+          
+          {/* Using Styled Component */}
+          {/* <StyledButton alt ={this.state.showPersons} onClick={this.togglePersonHadler}>
+            Switch Name
+          </StyledButton> */}
+
+          <button className= {buttonClass}
+          // {buttonClass.join(' ')} 
+            // onClick={()=>this.switchNamehandler('Sayanti')}
+            onClick={this.togglePersonHadler}>
+            Switch Name
+          </button>
+          {persons}
+      </div>
+      );
       
       {/* {this.state.showPersons?
       // <div>
@@ -187,13 +201,10 @@ class App extends Component {
        {/* <Person name="Ria" age="29"/>
        <Person name="Jia" age="21">My hobbies are cooking and dancing</Person>
        <Person name="Tina" age="27"/>  */}
-     </div>
-    //</StyleRoot>
-     
-    );
-     
-  }
-   
+    
+    {/* </StyleRoot> */}
+      
+  } 
   
 }
 
