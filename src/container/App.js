@@ -13,7 +13,9 @@ class App extends Component {
       {id: "dijoj4",name:"Tina", age:"27"}
     ],
     otherState:'some other value',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
+
   }
 
   switchNamehandler = (event, id)=>{
@@ -31,7 +33,7 @@ class App extends Component {
 
   }
 
-  togglePersonHadler = ()=>{
+  togglePersonsHandler = ()=>{
     console.log('Toggled');
     const doShow = this.state.showPersons;
     this.setState({
@@ -64,11 +66,19 @@ class App extends Component {
 
     return ( 
       <div className={classes.App}>
-        <Cockpit 
-          clicked ={this.togglePersonHadler}
-          showPersons = {this.state.showPersons}
-          persons = {this.state.persons}
-        />
+      <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}> Remove Cockpit
+      </button>
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonsHandler}
+          />
+        ) : null}
         {persons}
       </div>
       );     
