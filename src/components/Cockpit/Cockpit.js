@@ -1,9 +1,12 @@
 import React, {useEffect} from 'react';
 import classes from './Cockpit.module.css';
+import AuthContext from '../../context/auth-context';
+
 
 const Cockpit = props=> {
 
   useEffect(() => {
+    //ref.current.click  //reference
     console.log('[Cockpit.js] useEffect');
     // Http request...
     setTimeout(() => {
@@ -44,6 +47,15 @@ const Cockpit = props=> {
             onClick= {props.clicked}>
             Switch Name
         </button>
+        <AuthContext.Consumer>
+          { (context)=>{
+            <button onClick={context.login}>
+              Login
+            </button>
+            }
+          }
+        </AuthContext.Consumer>
+       
     </div>
         
     );

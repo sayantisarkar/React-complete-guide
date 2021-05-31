@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import AuthContext from '../context/auth-context';
 //import WithClass from '../hoc/withClass';
 import withClass from '../hoc/withClass';
 
@@ -18,7 +19,8 @@ class App extends Component {
     otherState:'some other value',
     showPersons: false,
     showCockpit: true,
-    counter:0
+    counter:0,
+    authenticated: false
 
   }
 
@@ -60,6 +62,10 @@ class App extends Component {
    })
   }
 
+  loginHandler =()=>{
+    this.authenticated = true
+  }
+
   render () {
 
     let persons = null;
@@ -83,6 +89,10 @@ class App extends Component {
             this.setState({ showCockpit: false });
           }}> Remove Cockpit
       </button>
+        <AuthContext.Provider value={{ 
+        authenticated: this.state.authenticated,
+        login:this.loginHandler
+        }}>
         {this.state.showCockpit ? (
           <Cockpit
             title={this.props.appTitle}
@@ -92,6 +102,8 @@ class App extends Component {
           />
         ) : null}
         {persons}
+        </AuthContext.Provider>
+      
       {/* </WithClass> */}
       </div>
       );     

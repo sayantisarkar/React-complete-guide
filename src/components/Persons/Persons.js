@@ -43,7 +43,8 @@ class Persons extends Component {
   }
 
 render() {
-    return this.props.persons.map((person,index)=>{
+    return <AuthContext.Consumer>
+    { (context)=> this.props.persons.map((person,index)=>{
         return (
         <Person click= {()=> this.props.clicked(index)} 
          name = {person.name} 
@@ -51,7 +52,10 @@ render() {
          key={person.id}
          changed = {(event)=>this.props.changed(event,person.id)}/>
         );
-    });
+     })
+   }
+    </AuthContext.Consumer>
+   
   }
 }
 
