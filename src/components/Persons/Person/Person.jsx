@@ -1,6 +1,9 @@
 import React from "react";
 import classes from '../Person/Person.module.css';
 import Aux from '../../../hoc/Auxillary';
+import withClass from '../../../hoc/withClass';
+import PropTypes from "prop-types";
+
 
 
 
@@ -16,4 +19,11 @@ const Person = (props)=> {
  );
 }
 
-export default Person;
+Person.propTypes = {
+   click:PropTypes.func,
+   name:PropTypes.string,
+   age:PropTypes.number,
+   changed:PropTypes.func
+};
+
+export default withClass(Person,classes.Person);

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+//import WithClass from '../hoc/withClass';
+import withClass from '../hoc/withClass';
+
 
 
 class App extends Component {
@@ -15,7 +17,8 @@ class App extends Component {
     ],
     otherState:'some other value',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    counter:0
 
   }
 
@@ -30,6 +33,13 @@ class App extends Component {
     persons[personIndex] = person;
     this.setState({
       persons :persons
+    });
+
+    this.setState((prevState, props)=>{
+      return {
+          persons :persons,
+          counter: prevState+1 // this.state.counter + 1 -->incorrect
+      };
     });
 
   }
@@ -66,7 +76,8 @@ class App extends Component {
      
 
     return ( 
-      <WithClass className={classes.App}>
+      // <WithClass className={classes.App}>
+      <div className={classes.App}>
       <button
           onClick={() => {
             this.setState({ showCockpit: false });
@@ -81,7 +92,8 @@ class App extends Component {
           />
         ) : null}
         {persons}
-      </WithClass>
+      {/* </WithClass> */}
+      </div>
       );     
   } 
   
